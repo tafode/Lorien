@@ -20,6 +20,7 @@ signal ui_scale_changed
 signal canvas_color_changed(color)
 signal grid_size_changed(size)
 signal grid_pattern_changed(pattern)
+signal theme_changed(theme_name)
 
 # -------------------------------------------------------------------------------------------------
 onready var _tab_container: TabContainer = $MarginContainer/TabContainer
@@ -200,6 +201,7 @@ func _on_Theme_item_selected(index: int):
 		THEME_LIGHT_INDEX: theme = Types.UITheme.LIGHT
 	
 	Settings.set_value(Settings.APPEARANCE_THEME, theme)
+	emit_signal("theme_changed","light")
 	_appearence_restart_label.show()
 
 # -------------------------------------------------------------------------------------------------

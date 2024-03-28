@@ -7,7 +7,7 @@
 [ext_resource path="res://UI/MainMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Toolbar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Dialogs/UnsavedChangesDialog.tscn" type="PackedScene" id=7]
-[ext_resource path="res://UI/Themes/theme_dark.tres" type="Theme" id=8]
+[ext_resource path="res://UI/Themes/dark/theme.tres" type="Theme" id=8]
 [ext_resource path="res://UI/Dialogs/AboutDialog.tscn" type="PackedScene" id=9]
 [ext_resource path="res://UI/Dialogs/SettingsDialog.tscn" type="PackedScene" id=10]
 [ext_resource path="res://UI/Dialogs/ExitDialog.tscn" type="PackedScene" id=11]
@@ -50,6 +50,7 @@ custom_constants/separation = 0
 [node name="Menubar" parent="Topbar" instance=ExtResource( 4 )]
 anchor_right = 0.0
 margin_right = 1920.0
+theme = null
 _main_menu_path = NodePath("../../MainMenu")
 
 [node name="Toolbar" parent="Topbar" instance=ExtResource( 6 )]
@@ -57,6 +58,7 @@ anchor_right = 0.0
 margin_top = 38.0
 margin_right = 1920.0
 margin_bottom = 78.0
+theme = null
 file_dialog_path = NodePath("../../FileDialog")
 
 [node name="Statusbar" parent="." instance=ExtResource( 3 )]
@@ -65,6 +67,7 @@ anchor_bottom = 1.0
 margin_top = -24.0
 margin_bottom = 0.0
 rect_scale = Vector2( 1, 1.00112 )
+theme = null
 
 [node name="BackgroundColorPickerPopup" type="Popup" parent="."]
 anchor_left = 1.0
@@ -73,7 +76,6 @@ margin_left = -326.515
 margin_top = 79.0921
 margin_right = -1.51489
 margin_bottom = 500.092
-theme = ExtResource( 8 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
@@ -91,10 +93,10 @@ margin_bottom = 202.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="ColorPicker" type="ColorPicker" parent="BackgroundColorPickerPopup/PanelContainer"]
-margin_left = 84.0
-margin_top = 84.0
-margin_right = 393.0
-margin_bottom = 488.0
+margin_left = 104.0
+margin_top = 104.0
+margin_right = 413.0
+margin_bottom = 508.0
 edit_alpha = false
 presets_enabled = false
 presets_visible = false
@@ -108,6 +110,7 @@ margin_left = 386.102
 margin_top = 79.6751
 margin_right = 744.102
 margin_bottom = 194.675
+theme = null
 add_new_palette_dialog_path = NodePath("../NewPaletteDialog")
 edit_palette_dialog = NodePath("../EditPaletteDialog")
 delete_palette_dialog = NodePath("../DeletePaletteDialog")
@@ -118,6 +121,7 @@ margin_left = 1.0
 margin_top = 38.0
 margin_right = 151.0
 margin_bottom = 138.0
+theme = null
 file_dialog_path = NodePath("../FileDialog")
 
 [node name="FileDialog" type="FileDialog" parent="."]
@@ -129,10 +133,11 @@ margin_left = -385.0
 margin_top = -216.5
 margin_right = 385.0
 margin_bottom = 216.5
-theme = ExtResource( 8 )
 popup_exclusive = true
 access = 2
 filters = PoolStringArray( "*.lorien" )
+current_dir = "/Projekte/OpenSource/Lorien/lorien"
+current_path = "/Projekte/OpenSource/Lorien/lorien/"
 __meta__ = {
 "_edit_lock_": true
 }
@@ -146,6 +151,7 @@ margin_left = -155.0
 margin_top = -45.0
 margin_right = 155.0
 margin_bottom = 45.0
+theme = null
 popup_exclusive = true
 
 [node name="NewPaletteDialog" parent="." instance=ExtResource( 12 )]
@@ -157,6 +163,7 @@ margin_left = -129.5
 margin_top = -40.0
 margin_right = 129.5
 margin_bottom = 40.0
+theme = null
 
 [node name="DeletePaletteDialog" parent="." instance=ExtResource( 15 )]
 visible = false
@@ -168,6 +175,7 @@ margin_left = -150.0
 margin_top = -50.0
 margin_right = 150.0
 margin_bottom = 50.0
+theme = null
 
 [node name="EditPaletteDialog" parent="." instance=ExtResource( 14 )]
 anchor_left = 0.5
@@ -178,6 +186,7 @@ margin_left = -239.0
 margin_top = -237.0
 margin_right = 239.0
 margin_bottom = 237.0
+theme = null
 
 [node name="ExportDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -188,10 +197,11 @@ margin_left = -385.0
 margin_top = -216.5
 margin_right = 385.0
 margin_bottom = 216.5
-theme = ExtResource( 8 )
 popup_exclusive = true
 window_title = "Export SVG"
 access = 2
+current_dir = "/Projekte/OpenSource/Lorien/lorien"
+current_path = "/Projekte/OpenSource/Lorien/lorien/"
 
 [node name="UnsavedChangesDialog" parent="." instance=ExtResource( 7 )]
 visible = false
@@ -203,6 +213,7 @@ margin_left = -155.0
 margin_top = -45.0
 margin_right = 155.0
 margin_bottom = 45.0
+theme = null
 popup_exclusive = true
 
 [node name="AboutDialog" parent="." instance=ExtResource( 9 )]
@@ -215,6 +226,7 @@ margin_left = -225.0
 margin_top = -102.5
 margin_right = 225.0
 margin_bottom = 102.5
+theme = null
 
 [node name="SettingsDialog" parent="." instance=ExtResource( 10 )]
 anchor_left = 0.5
@@ -225,6 +237,7 @@ margin_left = -260.0
 margin_top = -135.0
 margin_right = 260.0
 margin_bottom = 135.0
+theme = null
 
 [node name="GenericAlertDialog" type="AcceptDialog" parent="."]
 anchor_left = 0.5
@@ -235,7 +248,6 @@ margin_left = -68.5
 margin_top = -35.0
 margin_right = 68.5
 margin_bottom = 35.0
-theme = ExtResource( 8 )
 popup_exclusive = true
 dialog_text = "Generic message. "
 __meta__ = {

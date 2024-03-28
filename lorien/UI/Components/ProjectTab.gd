@@ -2,8 +2,8 @@ extends PanelContainer
 class_name ProjectTab
 
 # -------------------------------------------------------------------------------------------------
-const STYLE_ACTIVE = preload("res://UI/Themes/style_tab_active_dark.tres")
-const STYLE_INACTIVE = preload("res://UI/Themes/style_tab_inactive_dark.tres")
+const STYLE_ACTIVE = preload("res://UI/Themes/dark/style_tab_active.tres")
+const STYLE_INACTIVE = preload("res://UI/Themes/dark/style_tab_inactive.tres")
 
 # -------------------------------------------------------------------------------------------------
 signal selected

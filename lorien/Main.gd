@@ -71,6 +71,7 @@ func _ready():
 	_settings_dialog.connect("grid_size_changed", self, "_on_grid_size_changed")
 	_settings_dialog.connect("grid_pattern_changed", self, "_on_grid_pattern_changed")
 	_settings_dialog.connect("canvas_color_changed", self, "_on_canvas_color_changed")
+	_settings_dialog.connect("theme_changed", self, "_on_theme_changed")
 	
 	# Initialize scale
 	_on_scale_changed()
@@ -561,3 +562,10 @@ func _get_general_ui_scale() -> float:
 	elif smallest_dimension >= 1700:
 		return Config.DEFAULT_UI_SCALE * 1.5
 	return Config.DEFAULT_UI_SCALE
+	
+#-------------
+func _on_theme_changed(theme_name) -> void:
+	var theme = load("res://UI/Themes/"+theme_name+"/theme.tres")
+	print(theme)
+	set_theme(theme)
+	print(self.theme)

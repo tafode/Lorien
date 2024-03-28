@@ -66,16 +66,16 @@ func _gui_input(event: InputEvent) -> void:
 func _process_event(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		info.current_pressure = event.pressure
-		if info.pen_inverted != event.pen_inverted:
-			info.pen_inverted = event.pen_inverted
-			if info.pen_inverted:
-				var tool_type := _active_tool_type
-				use_tool(Types.Tool.ERASER)
-				# keep active tool type
-				_active_tool_type = tool_type
-			else:
-				# restore tool from type
-				use_tool(_active_tool_type)
+#		if info.pen_inverted != event.pen_inverted:
+#			info.pen_inverted = event.pen_inverted
+#			if info.pen_inverted:
+#				var tool_type := _active_tool_type
+#				use_tool(Types.Tool.ERASER)
+#				# keep active tool type
+#				_active_tool_type = tool_type
+#			else:
+#				# restore tool from type
+#				use_tool(_active_tool_type)
 
 	if event.is_action("deselect_all_strokes"):
 		if _active_tool == _selection_tool:
