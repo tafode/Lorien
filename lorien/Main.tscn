@@ -93,10 +93,10 @@ margin_bottom = 202.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="ColorPicker" type="ColorPicker" parent="BackgroundColorPickerPopup/PanelContainer"]
-margin_left = 104.0
-margin_top = 104.0
-margin_right = 413.0
-margin_bottom = 508.0
+margin_left = 108.0
+margin_top = 108.0
+margin_right = 417.0
+margin_bottom = 512.0
 edit_alpha = false
 presets_enabled = false
 presets_visible = false
@@ -134,10 +134,11 @@ margin_top = -216.5
 margin_right = 385.0
 margin_bottom = 216.5
 popup_exclusive = true
+window_title = "Datei speichern"
 access = 2
 filters = PoolStringArray( "*.lorien" )
-current_dir = "/Projekte/OpenSource/Lorien/lorien"
-current_path = "/Projekte/OpenSource/Lorien/lorien/"
+current_dir = "/home/marco/Programming/Lorien/lorien"
+current_path = "/home/marco/Programming/Lorien/lorien/"
 __meta__ = {
 "_edit_lock_": true
 }
@@ -200,8 +201,8 @@ margin_bottom = 216.5
 popup_exclusive = true
 window_title = "Export SVG"
 access = 2
-current_dir = "/Projekte/OpenSource/Lorien/lorien"
-current_path = "/Projekte/OpenSource/Lorien/lorien/"
+current_dir = "/home/marco/Programming/Lorien/lorien"
+current_path = "/home/marco/Programming/Lorien/lorien/"
 
 [node name="UnsavedChangesDialog" parent="." instance=ExtResource( 7 )]
 visible = false
@@ -249,6 +250,7 @@ margin_top = -35.0
 margin_right = 68.5
 margin_bottom = 35.0
 popup_exclusive = true
+window_title = "Warnung!"
 dialog_text = "Generic message. "
 __meta__ = {
 "_edit_lock_": true

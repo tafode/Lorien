@@ -2,8 +2,8 @@ extends PanelContainer
 class_name ProjectTab
 
 # -------------------------------------------------------------------------------------------------
-const STYLE_ACTIVE = preload("res://UI/Themes/dark/style_tab_active.tres")
-const STYLE_INACTIVE = preload("res://UI/Themes/dark/style_tab_inactive.tres")
+var style_active = preload("res://UI/Themes/dark/style_tab_active.tres")
+var style_inactive = preload("res://UI/Themes/dark/style_tab_inactive.tres")
 
 # -------------------------------------------------------------------------------------------------
 signal selected
@@ -39,8 +39,12 @@ func _on_CloseButton_pressed():
 # -------------------------------------------------------------------------------------------------
 func set_active(active: bool) -> void:
 	is_active = active
-	var new_style = STYLE_INACTIVE
+	var new_style = style_inactive
 	if is_active:
-		new_style = STYLE_ACTIVE
+		new_style = style_active
 	set("custom_styles/panel", new_style)
 
+# -------------------------------------------------------------------------------------------------
+func on_theme_changed(theme_name) -> void:
+	style_active = load("res://UI/Themes/" + theme_name + "/style_tab_active.tres")
+	style_inactive = load("res://UI/Themes/" + theme_name + "/style_tab_inactive.tres")

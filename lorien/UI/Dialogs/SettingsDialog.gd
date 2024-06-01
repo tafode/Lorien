@@ -3,6 +3,7 @@ extends WindowDialog
 # -------------------------------------------------------------------------------------------------
 const THEME_DARK_INDEX 	:= 0
 const THEME_LIGHT_INDEX := 1
+const THEME_BLUE_INDEX := 2
 
 const GRID_PATTERN_DOTS_INDEX 	:= 0
 const GRID_PATTERN_LINES_INDEX 	:= 1
@@ -64,7 +65,7 @@ func _set_values() -> void:
 	var brush_size = Settings.get_value(Settings.GENERAL_DEFAULT_BRUSH_SIZE, Config.DEFAULT_BRUSH_SIZE)
 	var canvas_color = Settings.get_value(Settings.APPEARANCE_CANVAS_COLOR, Config.DEFAULT_CANVAS_COLOR)
 	var project_dir = Settings.get_value(Settings.GENERAL_DEFAULT_PROJECT_DIR, "")
-	var theme = Settings.get_value(Settings.APPEARANCE_THEME, Types.UITheme.DARK)
+	var theme = "dark"#Settings.get_value(Settings.APPEARANCE_THEME, "dark")
 	var aa_mode = Settings.get_value(Settings.RENDERING_AA_MODE, Config.DEFAULT_AA_MODE)
 	var locale = Settings.get_value(Settings.GENERAL_LANGUAGE, "en")
 	var foreground_fps = Settings.get_value(Settings.RENDERING_FOREGROUND_FPS, Config.DEFAULT_FOREGROUND_FPS)
@@ -76,9 +77,6 @@ func _set_values() -> void:
 	var grid_size = Settings.get_value(Settings.APPEARANCE_GRID_SIZE, Config.DEFAULT_GRID_SIZE)
 	var tool_pressure = Settings.get_value(Settings.GENERAL_TOOL_PRESSURE, Config.DEFAULT_TOOL_PRESSURE)
 	
-	match theme:
-		Types.UITheme.DARK: _theme.selected = THEME_DARK_INDEX
-		Types.UITheme.LIGHT: _theme.selected = THEME_LIGHT_INDEX
 	match aa_mode:
 		Types.AAMode.NONE: _aa_mode.selected = AA_NONE_INDEX
 		Types.AAMode.OPENGL_HINT: _aa_mode.selected = AA_OPENGL_HINT_INDEX
@@ -88,7 +86,8 @@ func _set_values() -> void:
 			_ui_scale_options.selected = UI_SCALE_AUTO_INDEX
 			_ui_scale.set_editable(false)
 		Types.UIScale.CUSTOM: _ui_scale_options.selected = UI_SCALE_CUSTOM_INDEX
-		
+	
+	_set_theme(theme)
 	_set_languages(locale)
 	_set_rounding()
 	_set_UIScale_range()
@@ -130,6 +129,17 @@ func _set_languages(current_locale: String) -> void:
 	# Set selected
 	var id := Array(Settings.locales).find(current_locale)
 	_language_options.selected = _language_options.get_item_index(id)
+
+# -------------------------------------------------------------------------------------------------
+func _set_theme(current_theme: String) -> void:
+	var themes := Array(Settings.UITheme)
+	
+	for theme in themes:
+		var id = themes.find(theme)
+		_theme.add_item(theme, id)
+		
+	var id := Array(Settings.UITheme).find(current_theme)
+	_theme.selected = _theme.get_item_id(id)
 
 #--------------------------------------------------------------------------------------------------
 func _set_UIScale_range():
@@ -195,14 +205,11 @@ func _on_Target_Fps_Background_changed(value: int) -> void:
 
 # -------------------------------------------------------------------------------------------------
 func _on_Theme_item_selected(index: int):
-	var theme: int
-	match index:
-		THEME_DARK_INDEX: theme = Types.UITheme.DARK
-		THEME_LIGHT_INDEX: theme = Types.UITheme.LIGHT
+	var id := _theme.get_item_id(index)
+	var theme: String = Settings.UITheme[id]
 	
 	Settings.set_value(Settings.APPEARANCE_THEME, theme)
-	emit_signal("theme_changed","light")
-	_appearence_restart_label.show()
+	emit_signal("theme_changed",theme)
 
 # -------------------------------------------------------------------------------------------------
 func _on_AntiAliasing_item_selected(index: int):

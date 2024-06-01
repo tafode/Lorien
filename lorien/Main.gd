@@ -565,6 +565,7 @@ func _get_general_ui_scale() -> float:
 	
 #-------------
 func _on_theme_changed(theme_name) -> void:
+	print(theme_name)
 	var theme = load("res://UI/Themes/"+theme_name+"/theme.tres")
 	print(theme)
 	set_theme(theme)

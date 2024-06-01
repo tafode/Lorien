@@ -13,6 +13,7 @@
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="SettingsDialog" type="WindowDialog"]
+visible = true
 margin_right = 520.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 520, 270 )
@@ -42,6 +43,7 @@ __meta__ = {
 }
 
 [node name="General" type="Control" parent="MarginContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 27.0
@@ -199,7 +201,6 @@ text = "SETTINGS_RESTART_NOTICE"
 align = 1
 
 [node name="Appearance" type="Control" parent="MarginContainer/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 27.0
@@ -237,9 +238,8 @@ margin_right = 496.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Dark"
 items = [ "Dark", null, false, 0, null, "Light (not implemented yet)", null, false, 1, null ]
-selected = 0
+selected = 1
 
 [node name="UIScale" type="HBoxContainer" parent="MarginContainer/TabContainer/Appearance/VBoxContainer"]
 margin_top = 45.0

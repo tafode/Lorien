@@ -25,10 +25,12 @@ var _config_file := ConfigFile.new()
 var _i18n := I18nParser.new()
 var locales: PoolStringArray
 var language_names: PoolStringArray
+var UITheme : PoolStringArray 
 
 # -------------------------------------------------------------------------------------------------
 func _ready():
 	_config_file = ConfigFile.new()
+	UITheme = PoolStringArray(["dark","light"])
 	_load_settings()
 	_load_shortcuts()
 	_setup_default_shortcuts()
