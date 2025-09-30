@@ -17,7 +17,7 @@ var loaded := false
 var filepath: String
 var meta_data: Dictionary
 var strokes: Array[BrushStroke]
-var textBoxes : Array[TextBox]
+var textBoxes : Array[Label]
 
 # -------------------------------------------------------------------------------------------------
 func _init() -> void:

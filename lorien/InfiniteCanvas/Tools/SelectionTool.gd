@@ -146,7 +146,7 @@ func compute_selection(start_pos: Vector2, end_pos: Vector2) -> void:
 				if selection_rect.has_point(abs_point):
 					_set_stroke_selected(stroke)
 					break
-	for textBox: TextBox in _canvas.get_all_text_boxes():
+	for textBox: Label in _canvas.get_all_text_boxes():
 		var bounding_text_box_box: Rect2 = textBox.get_global_rect()
 		if selection_rect.intersects(bounding_text_box_box):
 			_set_text_box_selected(textBox)
@@ -213,7 +213,7 @@ func _set_stroke_selected(stroke: BrushStroke) -> void:
 		stroke.add_to_group(GROUP_STROKES_IN_SELECTION_RECTANGLE)
 
 # ------------------------------------------------------------------------------------------------
-func _set_text_box_selected(text_box : TextBox) -> void:
+func _set_text_box_selected(text_box : Label) -> void:
 	if text_box.is_in_group(GROUP_SELECTED_TEXT_BOXES):
 		text_box.modulate = Color.WHITE
 		text_box.add_to_group(GROUP_MARKED_TEXT_BOXES_FOR_DESELECTION)

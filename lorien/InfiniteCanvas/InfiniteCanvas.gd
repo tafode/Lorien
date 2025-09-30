@@ -36,6 +36,7 @@ var _use_optimizer := true
 var _optimizer: BrushStrokeOptimizer
 var _player: Player = null
 var _player_enabled := false
+var _textEdit : TextEdit = TextEdit.new()
 
 # -------------------------------------------------------------------------------------------------
 func _ready() -> void:
@@ -193,7 +194,7 @@ func get_all_strokes() -> Array[BrushStroke]:
 	return _current_project.strokes
 
 # -------------------------------------------------------------------------------------------------
-func get_all_text_boxes() -> Array[TextBox]:
+func get_all_text_boxes() -> Array[Label]:
 	return _current_project.textBoxes
 # -------------------------------------------------------------------------------------------------
 func enable() -> void:
@@ -431,35 +432,46 @@ func _undo_delete_text_box(text_box: TextBox) -> void:
 	_textboxes_parent.add_child(text_box)
 	
 # -------------------------------------------------------------------------------------------------
-func _create_textbox(textBox : TextBox) -> void:
+func _create_textEdit(textBox : TextEdit) -> void:
+	_textboxes_parent.add_child(textBox)
+	_current_project.textBoxes.append(textBox)
+	
+func _create_label(textBox : Label) -> void:
 	_textboxes_parent.add_child(textBox)
 	_current_project.textBoxes.append(textBox)
 
 # -------------------------------------------------------------------------------------------------
 func _on_text_box_tool_show_text_box_dialog(dialogPosition : Vector2) -> void:
-	_text_box_editor.visible = true
-	_text_box_editor.label_position = dialogPosition
+	print("TEXT BOX TOOL SHOW")
+	_textEdit = TextEdit.new()
+	_textEdit.set_position(dialogPosition)
+	_textEdit.custom_minimum_size = Vector2(350, 150)
+	_textEdit.SIZE_FILL 
+	_textEdit.focus_exited.connect(_change_edit_to_label)
+	_create_textEdit(_textEdit)
+
+# -------------------------------------------------------------------------------------------------
+func _change_edit_to_label()  -> void:
+		print("Focus Lost")
+		_on_text_box_editor_text_box_ok(_textEdit.text, _textEdit.position)
+		_textEdit.queue_free()
+	
 
 # -------------------------------------------------------------------------------------------------
 func _on_text_box_editor_text_box_ok(value : String, labelPosition : Vector2) -> void:
-	var label : TextBox = TextBox.new()
+	var label : Label = Label.new()
 	label.text = value
 	label.set_position(labelPosition)
 	label.add_theme_color_override("font_color", _brush_color)
-	_create_textbox(label)
-	_textbox_tool._state = _textbox_tool.State.CREATING
-
-# -------------------------------------------------------------------------------------------------
-func _on_text_box_editor_text_box_cancel() -> void:
+	_create_label(label)
 	_textbox_tool._state = _textbox_tool.State.CREATING
 	
 # -------------------------------------------------------------------------------------------------
-func _on_text_box_tool_edit_existing_text_box(textBox : TextBox) -> void:
-	_text_box_editor.visible = true
-	_text_box_editor.textEdit.text = textBox.text
-	_text_box_editor.label_position = textBox.position
-	_text_box_editor.textBox = textBox
-
-# -------------------------------------------------------------------------------------------------
-func _on_text_box_editor_text_box_ok_update() -> void:
-	_textbox_tool._state = _textbox_tool.State.CREATING
+func _on_text_box_tool_edit_existing_text_box(textBox : Label) -> void:
+	_textEdit = TextEdit.new()
+	_textEdit.custom_minimum_size = Vector2(350, 150)
+	_textEdit.SIZE_FILL 
+	_textEdit.focus_exited.connect(_change_edit_to_label)
+	_textEdit.position = textBox.position
+	_textEdit.text = textBox.text
+	_create_textEdit(_textEdit)

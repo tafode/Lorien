@@ -1,1 +1,1 @@
-class_name TextBox extends Label
+class_name TextBox extends TextEdit

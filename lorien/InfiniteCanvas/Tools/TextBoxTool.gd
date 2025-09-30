@@ -29,7 +29,7 @@ func tool_event(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed && _state == State.CREATING:
 				print(event.global_position)
-				for textBox : TextBox in get_parent()._textboxes_parent.get_children():
+				for textBox : Label in get_parent()._textboxes_parent.get_children():
 					if textBox.get_rect().has_point(event.global_position):
 						print("Click inside TextBox")
 						edit_existing_textBox.emit(textBox)

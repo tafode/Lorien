@@ -56,7 +56,7 @@ static func save_project(project: Project) -> void:
 			p_idx += 1
 
 	# Text Box Data
-	for textBox : TextBox in project.textBoxes:
+	for textBox : Label in project.textBoxes:
 		file.store_8(TYPE_TEXT_BOX)
 		file.store_float(textBox.global_position.x)
 		file.store_float(textBox.global_position.y)

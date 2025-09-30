@@ -54,7 +54,5 @@ func _on_theme_changed(themeName : String) -> void:
 	theme = currentTheme
 
 func _on_visibility_changed() -> void:
-	
-	
 	if visible:
 		textEdit.grab_focus()

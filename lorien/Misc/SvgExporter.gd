@@ -8,7 +8,7 @@ extends RefCounted
 const EDGE_MARGIN := 0.025
 
 # -------------------------------------------------------------------------------------------------
-func export_svg(strokes: Array[BrushStroke], text_boxes: Array[TextBox], background: Color, path: String) -> void:
+func export_svg(strokes: Array[BrushStroke], text_boxes: Array[Label], background: Color, path: String) -> void:
 	var start_time := Time.get_ticks_msec()
 	
 	# Open file
@@ -28,7 +28,7 @@ func export_svg(strokes: Array[BrushStroke], text_boxes: Array[TextBox], backgro
 		print("Stroke min",min_dim.x," ",min_dim.y)
 		print("Stroke max",max_dim.x," ",max_dim.y)
 		
-	for text_box: TextBox in text_boxes:
+	for text_box: Label in text_boxes:
 		min_dim.x = min(min_dim.x, text_box.get_rect().position.x)
 		min_dim.y = min(min_dim.y, text_box.get_rect().position.y)
 		max_dim.x = max(max_dim.x, text_box.get_rect().position.x+text_box.get_rect().size.x)
@@ -47,7 +47,7 @@ func export_svg(strokes: Array[BrushStroke], text_boxes: Array[TextBox], backgro
 	_svg_rect(file, origin, size, background)
 	for stroke: BrushStroke in strokes:
 		_svg_polyline(file, stroke)
-	for text_box: TextBox in text_boxes:
+	for text_box: Label in text_boxes:
 		_svg_text(file, text_box)
 	_svg_end(file)
 	
@@ -87,7 +87,7 @@ func _svg_polyline(file: FileAccess, stroke: BrushStroke) -> void:
 	file.store_string("\" style=\"fill:none;stroke:#%s;stroke-width:2\"/>\n" % stroke.color.to_html(false))
 	
 # -------------------------------------------------------------------------------------------------
-func _svg_text(file: FileAccess, text_box: TextBox) -> void:
+func _svg_text(file: FileAccess, text_box: Label) -> void:
 	file.store_string("<text x=\"")
 	file.store_string("%.1f" % [text_box.get_rect().position.x])
 	file.store_string("\" y=\"")
