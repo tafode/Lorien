@@ -9,6 +9,9 @@ class_name Statusbar
 @onready var _zoom_label: Label = $MarginContainer/HBoxContainer/Left/ZoomLabel
 @onready var _fps_label: Label = $MarginContainer/HBoxContainer/Left/FpsLabel
 
+signal resetPosition
+signal resetZoom
+
 var _str_position: String
 var _str_zoom: String
 var _str_pressure: String
@@ -32,11 +35,11 @@ func _apply_language() -> void:
 
 # -------------------------------------------------------------------------------------------------
 func set_camera_position(pos: Vector2) -> void:
-	_position_label.text = "%s: %d, %d" % [_str_position, pos.x, pos.y]
+	_position_label.text = " %d, %d" % [pos.x, pos.y]
 
 # -------------------------------------------------------------------------------------------------
 func set_camera_zoom(zoom: float) -> void:
-	_zoom_label.text = "%s: %.1f" % [_str_zoom, zoom]
+	_zoom_label.text = " %.1f" % [ zoom]
 
 # -------------------------------------------------------------------------------------------------
 func set_fps(fps: int) -> void:
@@ -56,3 +59,11 @@ func set_stroke_count(brush_stroke_count: int) -> void:
 # -------------------------------------------------------------------------------------------------
 func set_point_count(point_count: int) -> void:
 	_points_label.text = "%s: %d" % [_str_point_count, point_count]
+
+# -------------------------------------------------------------------------------------------------
+func _on_position_reset_button_pressed() -> void:
+	resetPosition.emit()
+
+# -------------------------------------------------------------------------------------------------
+func _on_zoom_reset_button_pressed() -> void:
+	resetZoom.emit()

@@ -15,6 +15,7 @@ script = ExtResource("2")
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
@@ -27,13 +28,26 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
+[node name="PositionResetButton" type="Button" parent="MarginContainer/HBoxContainer/Left"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+tooltip_text = "Reset Position"
+theme_type_variation = &"StatusBarButton"
+text = "Position:"
+
 [node name="PositionLabel" type="Label" parent="MarginContainer/HBoxContainer/Left"]
 layout_mode = 2
-text = "Position: -"
 
 [node name="Sep" type="Label" parent="MarginContainer/HBoxContainer/Left"]
 layout_mode = 2
 text = "|"
+
+[node name="ZoomResetButton" type="Button" parent="MarginContainer/HBoxContainer/Left"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+tooltip_text = "Reset Zoom"
+theme_type_variation = &"StatusBarButton"
+text = "Zoom:"
 
 [node name="ZoomLabel" type="Label" parent="MarginContainer/HBoxContainer/Left"]
 layout_mode = 2
@@ -73,3 +87,6 @@ text = "|"
 [node name="PointsLabel" type="Label" parent="MarginContainer/HBoxContainer/Right"]
 layout_mode = 2
 text = "Points: 0"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Left/PositionResetButton" to="." method="_on_position_reset_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Left/ZoomResetButton" to="." method="_on_zoom_reset_button_pressed"]

@@ -636,3 +636,11 @@ func _on_theme_changed(path : String) -> void:
 	_settings_dialog.queue_redraw()
 	queue_redraw()
 	print(theme)
+
+# --------------------------------------------------------------------------------------------------
+func _on_statusbar_reset_position() -> void:
+	_canvas.reset_position()
+
+# --------------------------------------------------------------------------------------------------
+func _on_statusbar_reset_zoom() -> void:
+	_canvas.reset_zoom()

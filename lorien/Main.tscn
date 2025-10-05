@@ -191,3 +191,6 @@ size = Vector2i(625, 175)
 theme = ExtResource("8")
 access = 2
 use_native_dialog = true
+
+[connection signal="resetPosition" from="Statusbar" to="." method="_on_statusbar_reset_position"]
+[connection signal="resetZoom" from="Statusbar" to="." method="_on_statusbar_reset_zoom"]

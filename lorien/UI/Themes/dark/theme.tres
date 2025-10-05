@@ -1,6 +1,5 @@
-[gd_resource type="Theme" load_steps=28 format=4 uid="uid://u5qnpgxqykiv"]
+[gd_resource type="Theme" load_steps=33 format=4 uid="uid://u5qnpgxqykiv"]
 
-[ext_resource type="Texture2D" uid="uid://bp1yka17gbjtu" path="res://Assets/Icons/close.png" id="1_qgxa7"]
 [ext_resource type="StyleBox" uid="uid://kdduww61cjw" path="res://UI/Themes/dark/tab_inactive.tres" id="2_n6mkw"]
 [ext_resource type="StyleBox" uid="uid://dtn7ehcyfik4a" path="res://UI/Themes/dark/tab_active.tres" id="3_rqnin"]
 
@@ -137,6 +136,31 @@ shadow_size = 4
 color = Color(1, 1, 1, 0.1)
 grow_begin = 7.0
 grow_end = 7.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwfso"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2rrf"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5a3g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jp7y7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0dxl"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 
 [sub_resource type="Image" id="Image_phhbj"]
 data = {
@@ -2568,6 +2592,12 @@ PopupMenu/styles/labeled_separator_right = null
 PopupMenu/styles/panel = SubResource("15")
 PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/separator = SubResource("16")
+StatusBarButton/base_type = &"Button"
+StatusBarButton/styles/focus = SubResource("StyleBoxEmpty_cwfso")
+StatusBarButton/styles/hover = SubResource("StyleBoxFlat_t2rrf")
+StatusBarButton/styles/hover_pressed = SubResource("StyleBoxFlat_i5a3g")
+StatusBarButton/styles/normal = SubResource("StyleBoxEmpty_jp7y7")
+StatusBarButton/styles/pressed = SubResource("StyleBoxFlat_q0dxl")
 TabBar/colors/drop_mark_color = Color(1, 1, 1, 1)
 TabBar/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 TabBar/colors/font_hovered_color = Color(0.95, 0.95, 0.95, 1)
@@ -2578,7 +2608,7 @@ TabBar/constants/h_separation = 4
 TabBar/constants/icon_max_width = 0
 TabBar/constants/outline_size = 0
 TabBar/fonts/font = SubResource("FontFile_1bm21")
-TabBar/icons/close = ExtResource("1_qgxa7")
+TabBar/icons/close = null
 TabBar/styles/button_highlight = SubResource("StyleBoxEmpty_me351")
 TabBar/styles/button_pressed = SubResource("StyleBoxEmpty_n0chp")
 TabBar/styles/tab_disabled = ExtResource("2_n6mkw")

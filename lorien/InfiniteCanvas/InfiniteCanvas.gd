@@ -388,3 +388,11 @@ func _undo_delete_stroke(stroke: BrushStroke) -> void:
 	_strokes_parent.add_child(stroke)
 	info.point_count += stroke.points.size()
 	info.stroke_count += 1
+	
+# -------------------------------------------------------------------------------------------------
+func reset_position():
+	_camera.reset_position()
+
+# -------------------------------------------------------------------------------------------------
+func reset_zoom():
+	_camera.reset_zoom()

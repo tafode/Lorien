@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=27 format=4 uid="uid://cf4gyeqbly7p8"]
+[gd_resource type="Theme" load_steps=32 format=4 uid="uid://cf4gyeqbly7p8"]
 
 [ext_resource type="Texture2D" uid="uid://bp1yka17gbjtu" path="res://Assets/Icons/close.png" id="1_52p0o"]
 [ext_resource type="StyleBox" uid="uid://kdduww61cjw" path="res://UI/Themes/dark/tab_inactive.tres" id="2_6sj5t"]
@@ -123,6 +123,28 @@ shadow_size = 4
 color = Color(1, 1, 1, 0.1)
 grow_begin = 7.0
 grow_end = 7.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n8mvn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_47yds"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.306923, 0.306923, 0.306922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2n2l1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.306923, 0.306923, 0.306922, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_buc1g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vp7ww"]
 
 [sub_resource type="Image" id="Image_phhbj"]
 data = {
@@ -2433,7 +2455,7 @@ content_margin_left = 6.0
 content_margin_top = 6.0
 content_margin_right = 6.0
 content_margin_bottom = 6.0
-bg_color = Color(0.12549, 0.129412, 0.141176, 1)
+bg_color = Color(1, 1, 1, 1)
 shadow_color = Color(0, 0, 0, 0.317647)
 shadow_size = 4
 
@@ -2552,6 +2574,17 @@ PopupMenu/styles/labeled_separator_right = null
 PopupMenu/styles/panel = SubResource("15")
 PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/separator = SubResource("16")
+StatusBarButton/base_type = &"Button"
+StatusBarButton/colors/font_color = Color(0, 0, 0, 1)
+StatusBarButton/colors/font_focus_color = Color(0, 0, 0, 1)
+StatusBarButton/colors/font_hover_color = Color(0, 0, 0, 1)
+StatusBarButton/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+StatusBarButton/colors/font_pressed_color = Color(0, 0, 0, 1)
+StatusBarButton/styles/focus = SubResource("StyleBoxEmpty_n8mvn")
+StatusBarButton/styles/hover = SubResource("StyleBoxFlat_47yds")
+StatusBarButton/styles/hover_pressed = SubResource("StyleBoxFlat_2n2l1")
+StatusBarButton/styles/normal = SubResource("StyleBoxEmpty_buc1g")
+StatusBarButton/styles/pressed = SubResource("StyleBoxEmpty_vp7ww")
 TabBar/colors/drop_mark_color = Color(1, 1, 1, 1)
 TabBar/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 TabBar/colors/font_hovered_color = Color(0.95, 0.95, 0.95, 1)
