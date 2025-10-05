@@ -56,6 +56,8 @@ STATUSBAR_PRESSURE              Pressure
 STATUSBAR_FPS                   FPS
 STATUSBAR_STROKES               Strokes
 STATUSBAR_POINTS                Points
+STATUSBAR_TOOLTIP_POSITION      Reset Position
+STATUSBAR_TOOLTIP_ZOOM          Reset Zoom
 
 # -----------------------------------------------------------------------------
 # Settings strings
