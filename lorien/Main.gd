@@ -139,10 +139,10 @@ func _process(delta: float) -> void:
 	
 	var focused_control = get_viewport().gui_get_focus_owner()
 
-	if focused_control:
-		print("Focused Control: ", focused_control.name)
-	else:
-		print("No control has focus.")
+	#if focused_control:
+	#	print("Focused Control: ", focused_control.name)
+	#else:
+	#	print("No control has focus.")
 	
 	# Lower fps if user is idle
 	var idle := (Time.get_ticks_msec() - _last_input_time) > Config.BACKGROUND_IDLE_TIME_THRESHOLD

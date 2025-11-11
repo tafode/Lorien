@@ -80,9 +80,14 @@ func _gui_input(event: InputEvent) -> void:
 
 # -------------------------------------------------------------------------------------------------
 func _process_event(event: InputEvent) -> void:
+	print("Process Event")
 	if event is InputEventMouseMotion:
+		print("Input is Mouse Motion")
 		info.current_pressure = event.pressure
+		print("Current Pressure ", info.current_pressure)
+		print("Event.pressure ", event.pressure)
 		if info.pen_inverted != event.pen_inverted:
+			print("Pen Inverted is not the same as event pen inverted", info.pen_inverted, event.pen_inverted)
 			info.pen_inverted = event.pen_inverted
 			if info.pen_inverted:
 				var tool_type := _active_tool_type
@@ -94,11 +99,13 @@ func _process_event(event: InputEvent) -> void:
 				use_tool(_active_tool_type)
 
 	if event.is_action("deselect_all_strokes"):
+		print("Action is deselect_all_strokes")
 		if _active_tool == _selection_tool:
 			_selection_tool.deselect_all_strokes()
 			_selection_tool.deselect_all_text_boxes()
 
 	if event.is_action("delete_selected_strokes"):
+		print("Action is Delete Selected Strokes")
 		if _active_tool == _selection_tool:
 			_delete_selected_strokes()
 			_delete_selected_text_boxes_strokes()
@@ -393,7 +400,7 @@ func _delete_selected_text_boxes_strokes() -> void:
 	var text_boxes := _selection_tool.get_selected_text_boxes()
 	if !text_boxes.is_empty():
 		_current_project.undo_redo.create_action("Delete Selection")
-		for text_box: TextBox in text_boxes:
+		for text_box: Label in text_boxes:
 			_current_project.undo_redo.add_do_method(_do_delete_text_box.bind(text_box))
 			_current_project.undo_redo.add_undo_reference(text_box)
 			_current_project.undo_redo.add_undo_method(_undo_delete_text_box.bind(text_box))
@@ -432,13 +439,10 @@ func _undo_delete_text_box(text_box: TextBox) -> void:
 	_textboxes_parent.add_child(text_box)
 	
 # -------------------------------------------------------------------------------------------------
-func _create_textEdit(textBox : TextEdit) -> void:
-	_textboxes_parent.add_child(textBox)
-	_current_project.textBoxes.append(textBox)
-	
 func _create_label(textBox : Label) -> void:
 	_textboxes_parent.add_child(textBox)
 	_current_project.textBoxes.append(textBox)
+	enable()
 
 # -------------------------------------------------------------------------------------------------
 func _on_text_box_tool_show_text_box_dialog(dialogPosition : Vector2) -> void:
@@ -448,23 +452,27 @@ func _on_text_box_tool_show_text_box_dialog(dialogPosition : Vector2) -> void:
 	_textEdit.custom_minimum_size = Vector2(350, 150)
 	_textEdit.SIZE_FILL 
 	_textEdit.focus_exited.connect(_change_edit_to_label)
-	_create_textEdit(_textEdit)
+	_textboxes_parent.add_child(_textEdit)
 
 # -------------------------------------------------------------------------------------------------
 func _change_edit_to_label()  -> void:
 		print("Focus Lost")
-		_on_text_box_editor_text_box_ok(_textEdit.text, _textEdit.position)
+		if _textEdit.text != "":
+			_on_text_box_editor_text_box_ok(_textEdit.text, _textEdit.position)
+		_textbox_tool._state = _textbox_tool.State.NONE
 		_textEdit.queue_free()
+		_textbox_tool.reset()
+		enable()
 	
 
 # -------------------------------------------------------------------------------------------------
 func _on_text_box_editor_text_box_ok(value : String, labelPosition : Vector2) -> void:
+	print("Text Box OK")
 	var label : Label = Label.new()
 	label.text = value
 	label.set_position(labelPosition)
 	label.add_theme_color_override("font_color", _brush_color)
 	_create_label(label)
-	_textbox_tool._state = _textbox_tool.State.CREATING
 	
 # -------------------------------------------------------------------------------------------------
 func _on_text_box_tool_edit_existing_text_box(textBox : Label) -> void:
@@ -474,4 +482,5 @@ func _on_text_box_tool_edit_existing_text_box(textBox : Label) -> void:
 	_textEdit.focus_exited.connect(_change_edit_to_label)
 	_textEdit.position = textBox.position
 	_textEdit.text = textBox.text
-	_create_textEdit(_textEdit)
+	_textboxes_parent.add_child(_textEdit)
+	textBox.call_deferred("queue_free")

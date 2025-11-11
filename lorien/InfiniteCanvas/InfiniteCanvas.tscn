@@ -62,7 +62,6 @@ cursor_path = NodePath("../SubViewport/SelectionCursor")
 
 [node name="TextBoxTool" type="Node" parent="."]
 script = ExtResource("9_yqcq5")
-_textBox = ExtResource("10_gdd0v")
 cursor_path = NodePath("../SubViewport/SelectionCursor")
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -96,6 +95,11 @@ layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
 
+[node name="Label" type="Label" parent="SubViewport/TextBoxes"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 22.3333
+
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
@@ -104,4 +108,3 @@ mouse_filter = 1
 [connection signal="textBox_ok_update" from="TextBoxEditor" to="." method="_on_text_box_editor_text_box_ok_update"]
 [connection signal="edit_existing_textBox" from="TextBoxTool" to="." method="_on_text_box_tool_edit_existing_text_box"]
 [connection signal="show_textBoxDialog" from="TextBoxTool" to="." method="_on_text_box_tool_show_text_box_dialog"]
-[connection signal="text_box_tool_reset" from="TextBoxTool" to="." method="_on_text_box_tool_text_box_tool_reset"]

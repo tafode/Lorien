@@ -86,6 +86,8 @@ func _input(event):
 
 # -------------------------------------------------------------------------------------------------
 func tool_event(event: InputEvent) -> void:
+	print(event)
+	print("Input is enabled: ", _is_input_enabled)
 	if _is_input_enabled:
 		if event is InputEventKey:
 			if Utils.is_action_pressed("canvas_pan_key", event):

@@ -82,7 +82,7 @@ func tool_event(event: InputEvent) -> void:
 					_offset_selected_text_boxes(_cursor.global_position)
 					for s: BrushStroke in get_selected_strokes():
 						_stroke_positions_before_move[s] = s.global_position
-					for t: TextBox in get_selected_text_boxes():
+					for t: Label in get_selected_text_boxes():
 						_text_box_positions_before_move[t] = t.global_position
 			# LMB up - stop selection or movement
 			else:
@@ -193,8 +193,8 @@ func _modify_strokes_colors(strokes: Array[BrushStroke], color: Color) -> void:
 		stroke.color = color
 		
 # ------------------------------------------------------------------------------------------------
-func _modify_text_boxes_colors(text_boxes: Array[TextBox], color: Color) -> void:	
-	for text_box: TextBox in text_boxes:
+func _modify_text_boxes_colors(text_boxes: Array[Label], color: Color) -> void:	
+	for text_box: Label in text_boxes:
 		text_box.add_theme_color_override("font_color", color)
 
 # ------------------------------------------------------------------------------------------------
@@ -228,7 +228,7 @@ func _add_undoredo_action_for_moved_strokes() -> void:
 	for stroke: BrushStroke in _stroke_positions_before_move.keys():
 		project.undo_redo.add_do_property(stroke, "global_position", stroke.global_position)
 		project.undo_redo.add_undo_property(stroke, "global_position", _stroke_positions_before_move[stroke])
-	for text_box: TextBox in _text_box_positions_before_move.keys():
+	for text_box: Label in _text_box_positions_before_move.keys():
 		project.undo_redo.add_do_property(text_box, "global_position", text_box.global_position)
 		project.undo_redo.add_undo_property(text_box, "global_position", _text_box_positions_before_move[text_box])
 	project.undo_redo.commit_action()
@@ -238,7 +238,7 @@ func _add_undoredo_action_for_moved_strokes() -> void:
 func _add_undoredo_action_for_moved_text_boxes() -> void:
 	var project: Project = ProjectManager.get_active_project()
 	project.undo_redo.create_action("Move Text_Boxes")
-	for text_box: TextBox in _text_box_positions_before_move.keys():
+	for text_box: Label in _text_box_positions_before_move.keys():
 		project.undo_redo.add_do_property(text_box, "global_position", text_box.global_position)
 		project.undo_redo.add_undo_property(text_box, "global_position", _text_box_positions_before_move[text_box])
 	project.undo_redo.commit_action()
@@ -251,7 +251,7 @@ func _offset_selected_strokes(offset: Vector2) -> void:
 		
 # -------------------------------------------------------------------------------------------------
 func _offset_selected_text_boxes(offset: Vector2) -> void:
-	for text_box: TextBox in get_selected_text_boxes():
+	for text_box: Label in get_selected_text_boxes():
 		text_box.set_meta(META_OFFSET, text_box.position - offset)
 
 # -------------------------------------------------------------------------------------------------
@@ -261,7 +261,7 @@ func _move_selected_strokes() -> void:
 
 # -------------------------------------------------------------------------------------------------
 func _move_selected_text_boxes() -> void:
-	for text_box: TextBox in get_selected_text_boxes():
+	for text_box: Label in get_selected_text_boxes():
 		text_box.global_position = text_box.get_meta(META_OFFSET) + _cursor.global_position
 
 # ------------------------------------------------------------------------------------------------
@@ -272,7 +272,7 @@ func _commit_strokes_under_selection_rectangle() -> void:
 
 # ------------------------------------------------------------------------------------------------
 func _commit_text_boxes_under_selection_rectangle() -> void:
-	for text_box: TextBox in get_tree().get_nodes_in_group(GROUP_TEXT_BOXES_IN_SELECTION_RECTANGLE):
+	for text_box: Label in get_tree().get_nodes_in_group(GROUP_TEXT_BOXES_IN_SELECTION_RECTANGLE):
 		text_box.remove_from_group(GROUP_TEXT_BOXES_IN_SELECTION_RECTANGLE)
 		text_box.add_to_group(GROUP_SELECTED_TEXT_BOXES)
 	print(get_selected_text_boxes())
@@ -286,7 +286,7 @@ func _deselect_marked_strokes() -> void:
 
 # ------------------------------------------------------------------------------------------------
 func _deselect_marked_text_boxes() -> void:
-	for textBox: TextBox in get_tree().get_nodes_in_group(GROUP_MARKED_TEXT_BOXES_FOR_DESELECTION):
+	for textBox: Label in get_tree().get_nodes_in_group(GROUP_MARKED_TEXT_BOXES_FOR_DESELECTION):
 		textBox.remove_from_group(GROUP_MARKED_TEXT_BOXES_FOR_DESELECTION)
 		textBox.remove_from_group(GROUP_SELECTED_TEXT_BOXES)
 		textBox.modulate = Color.WHITE		
@@ -331,12 +331,12 @@ func get_selected_strokes() -> Array[BrushStroke]:
 	return strokes
 
 # ------------------------------------------------------------------------------------------------
-func get_selected_text_boxes() -> Array[TextBox]:
+func get_selected_text_boxes() -> Array[Label]:
 	# Can't cast from Array[Node] to Array[TextBox] directly (godot bug/missing feature?)
 	# so let's do it per item
-	var text_boxes: Array[TextBox]
+	var text_boxes: Array[Label]
 	for text_box in get_tree().get_nodes_in_group(GROUP_SELECTED_TEXT_BOXES):
-		text_boxes.append(text_box as TextBox)
+		text_boxes.append(text_box as Label)
 	
 	return text_boxes
 
