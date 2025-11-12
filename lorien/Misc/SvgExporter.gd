@@ -25,17 +25,12 @@ func export_svg(strokes: Array[BrushStroke], text_boxes: Array[Label], backgroun
 		min_dim.y = min(min_dim.y, stroke.top_left_pos.y + stroke.global_position.y)
 		max_dim.x = max(max_dim.x, stroke.bottom_right_pos.x + stroke.global_position.x)
 		max_dim.y = max(max_dim.y, stroke.bottom_right_pos.y + stroke.global_position.y)
-		print("Stroke min",min_dim.x," ",min_dim.y)
-		print("Stroke max",max_dim.x," ",max_dim.y)
 		
 	for text_box: Label in text_boxes:
 		min_dim.x = min(min_dim.x, text_box.get_rect().position.x)
 		min_dim.y = min(min_dim.y, text_box.get_rect().position.y)
 		max_dim.x = max(max_dim.x, text_box.get_rect().position.x+text_box.get_rect().size.x)
 		max_dim.y = max(max_dim.y, text_box.get_rect().position.y+text_box.get_rect().size.y)
-		print("Global Position X: ",text_box.global_position.x, " Rect Position x: ", text_box.get_rect().position.x, " Rect Size x: ", text_box.get_rect().size.x)
-		print("Text Box min",min_dim.x," ",min_dim.y)
-		print("Text Box max",max_dim.x," ",max_dim.y)
 		
 	var size := max_dim - min_dim
 	var margin_size := size * EDGE_MARGIN

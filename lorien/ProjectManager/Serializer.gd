@@ -6,7 +6,6 @@ class_name Serializer
 
 # -------------------------------------------------------------------------------------------------
 const BRUSH_STROKE = preload("res://BrushStroke/BrushStroke.tscn")
-const TEXT_BOX = preload("res://TextBox/TextBox.tscn")
 const COMPRESSION_METHOD = FileAccess.COMPRESSION_DEFLATE
 const POINT_ELEM_SIZE := 3
 
@@ -126,7 +125,7 @@ static func load_project(project: Project) -> void:
 				var x = file.get_float()
 				var y = file.get_float()
 				var text = file.get_pascal_string()
-				var textBox : TextBox = TextBox.new()
+				var textBox : Label = Label.new()
 				textBox.set_global_position(Vector2(x,y))
 				textBox.text = text;
 				var r := file.get_8()

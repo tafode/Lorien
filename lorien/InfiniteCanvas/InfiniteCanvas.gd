@@ -20,7 +20,6 @@ const PLAYER = preload("res://Misc/Player/Player.tscn")
 @onready var _camera: Camera2D = $SubViewport/Camera2D
 @onready var _viewport: SubViewport = $SubViewport
 @onready var _grid: InfiniteCanvasGrid = $SubViewport/Grid
-@onready var _text_box_editor : PanelContainer = $TextBoxEditor
 
 @onready var _constant_pressure_curve := load("res://InfiniteCanvas/constant_pressure_curve.tres")
 @onready var _default_pressure_curve := load("res://InfiniteCanvas/default_pressure_curve.tres")
@@ -80,14 +79,10 @@ func _gui_input(event: InputEvent) -> void:
 
 # -------------------------------------------------------------------------------------------------
 func _process_event(event: InputEvent) -> void:
-	print("Process Event")
+
 	if event is InputEventMouseMotion:
-		print("Input is Mouse Motion")
 		info.current_pressure = event.pressure
-		print("Current Pressure ", info.current_pressure)
-		print("Event.pressure ", event.pressure)
 		if info.pen_inverted != event.pen_inverted:
-			print("Pen Inverted is not the same as event pen inverted", info.pen_inverted, event.pen_inverted)
 			info.pen_inverted = event.pen_inverted
 			if info.pen_inverted:
 				var tool_type := _active_tool_type
@@ -99,13 +94,11 @@ func _process_event(event: InputEvent) -> void:
 				use_tool(_active_tool_type)
 
 	if event.is_action("deselect_all_strokes"):
-		print("Action is deselect_all_strokes")
 		if _active_tool == _selection_tool:
 			_selection_tool.deselect_all_strokes()
 			_selection_tool.deselect_all_text_boxes()
 
 	if event.is_action("delete_selected_strokes"):
-		print("Action is Delete Selected Strokes")
 		if _active_tool == _selection_tool:
 			_delete_selected_strokes()
 			_delete_selected_text_boxes_strokes()
@@ -417,7 +410,7 @@ func _do_delete_stroke(stroke: BrushStroke) -> void:
 	info.stroke_count -= 1
 
 # -------------------------------------------------------------------------------------------------
-func _do_delete_text_box(text_box: TextBox) -> void:
+func _do_delete_text_box(text_box: Label) -> void:
 	var index := _current_project.textBoxes.find(text_box)
 	_current_project.textBoxes.remove_at(index)
 	_textboxes_parent.remove_child(text_box)
@@ -434,7 +427,7 @@ func _undo_delete_stroke(stroke: BrushStroke) -> void:
 # FIXME: this adds text boxes at the back and does not preserve text boxes order; not sure how to do that except saving before
 # and after versions of the text boxes arrays which is a nogo.
 # -------------------------------------------------------------------------------------------------
-func _undo_delete_text_box(text_box: TextBox) -> void:
+func _undo_delete_text_box(text_box: Label) -> void:
 	_current_project.textBoxes.append(text_box)
 	_textboxes_parent.add_child(text_box)
 	
@@ -446,7 +439,6 @@ func _create_label(textBox : Label) -> void:
 
 # -------------------------------------------------------------------------------------------------
 func _on_text_box_tool_show_text_box_dialog(dialogPosition : Vector2) -> void:
-	print("TEXT BOX TOOL SHOW")
 	_textEdit = TextEdit.new()
 	_textEdit.set_position(dialogPosition)
 	_textEdit.custom_minimum_size = Vector2(350, 150)
@@ -456,7 +448,6 @@ func _on_text_box_tool_show_text_box_dialog(dialogPosition : Vector2) -> void:
 
 # -------------------------------------------------------------------------------------------------
 func _change_edit_to_label()  -> void:
-		print("Focus Lost")
 		if _textEdit.text != "":
 			_on_text_box_editor_text_box_ok(_textEdit.text, _textEdit.position)
 		_textbox_tool._state = _textbox_tool.State.NONE
@@ -467,7 +458,6 @@ func _change_edit_to_label()  -> void:
 
 # -------------------------------------------------------------------------------------------------
 func _on_text_box_editor_text_box_ok(value : String, labelPosition : Vector2) -> void:
-	print("Text Box OK")
 	var label : Label = Label.new()
 	label.text = value
 	label.set_position(labelPosition)

@@ -275,7 +275,6 @@ func _commit_text_boxes_under_selection_rectangle() -> void:
 	for text_box: Label in get_tree().get_nodes_in_group(GROUP_TEXT_BOXES_IN_SELECTION_RECTANGLE):
 		text_box.remove_from_group(GROUP_TEXT_BOXES_IN_SELECTION_RECTANGLE)
 		text_box.add_to_group(GROUP_SELECTED_TEXT_BOXES)
-	print(get_selected_text_boxes())
 
 # ------------------------------------------------------------------------------------------------
 func _deselect_marked_strokes() -> void:

@@ -47,11 +47,6 @@ func remove_last_stroke() -> void:
 	if !strokes.is_empty():
 		strokes.pop_back()
 
-#-------------------------------------------------------------------------------------------------
-func add_text_box(textBox : TextBox) -> void:
-	textBoxes.append(textBox)
-	dirty = true
-
 # -------------------------------------------------------------------------------------------------
 func get_scene_file_path() -> String:
 	if filepath.is_empty():
